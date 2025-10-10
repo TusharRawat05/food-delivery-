@@ -7,7 +7,7 @@ interface category_prop{
 }
 const ExploreMenu = ({category, setcategory}:category_prop) => {
   return (
-    <div className='explore-menu' id="expore-menu">
+    <div className='explore-menu' id="explore-menu">
         <h1>Explore Our Menu</h1>
         <p className='explore-menu-text'>
             Choose from a diverse menu feacturing a delectable array

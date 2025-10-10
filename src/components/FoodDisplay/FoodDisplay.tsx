@@ -3,11 +3,12 @@ import './FoodDisplay.css'
 import { StoreContext } from '../../Context/StoreContext'
 import Fooditem from '../FoodItem/fooditem'
 interface itemtype{
-    id:number,
+    _id:number,
     name:string,
     price:number,
     description:string
-    image:string
+    image:string,
+    category:string
 
 }
 const FoodDisplay = ({category}:string) => {

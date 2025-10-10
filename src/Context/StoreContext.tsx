@@ -1,9 +1,17 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useState } from "react"
 import { food_list } from "../assets/frontend_assets/assets"
 
-export const StoreContext=createContext(null)
+interface StoreContextType {
+  food_list: typeof food_list;
+  cartItems: { [key: number]: number };
+  addToCart: (itemId: number) => void;
+  removeFromCart: (itemId: number) => void;
+  getTotalCartAmount: () => number;
+  setcartItems: React.Dispatch<React.SetStateAction<{ [key: number]: number }>>;
+}
+export const StoreContext=createContext<StoreContextType|null>(null)
 
-const StoreContextProvider=(props)=>{
+const StoreContextProvider=({children}:{children:React.ReactNode})=>{
 
     const [cartItems, setcartItems] = useState<{[key:number]:number}>({})
 
@@ -17,22 +25,32 @@ const StoreContextProvider=(props)=>{
     const removeFromCart=(itemId:number)=>{
         setcartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
     }
+    const getTotalCartAmount=():number=>{
+        let totalAmount=0;
+        for(const item in cartItems){
+            if(cartItems[item]>0){
+                 let itemInfo=food_list.find((product)=>product._id===item)
+                 totalAmount+=itemInfo.price*cartItems[item];
+            }
+           
+        }
+        return totalAmount;
+    }
 
-    useEffect(()=>{
-        console.log(cartItems)
-    },[cartItems])
-    const contextValue={
+   
+    const contextValue:StoreContextType={
         food_list,
-        cartItems,
+        cartItems, 
         setcartItems,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        getTotalCartAmount
 
 
     }
     return(
         <StoreContext.Provider value={contextValue}>
-            {props.children}
+            {children}
         </StoreContext.Provider>
     )
 }
