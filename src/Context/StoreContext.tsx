@@ -9,6 +9,15 @@ interface StoreContextType {
   getTotalCartAmount: () => number;
   setcartItems: React.Dispatch<React.SetStateAction<{ [key: number]: number }>>;
 }
+
+interface FoodItem {
+  _id: string;
+  name: string;
+  image: string;
+  price: number;
+  description: string;
+  category: string;
+}
 export const StoreContext=createContext<StoreContextType|null>(null)
 
 const StoreContextProvider=({children}:{children:React.ReactNode})=>{
@@ -29,8 +38,8 @@ const StoreContextProvider=({children}:{children:React.ReactNode})=>{
         let totalAmount=0;
         for(const item in cartItems){
             if(cartItems[item]>0){
-                 let itemInfo=food_list.find((product)=>product._id===item)
-                 totalAmount+=itemInfo.price*cartItems[item];
+                 const itemInfo:FoodItem|undefined=food_list.find((product)=>product._id===item)
+                 totalAmount+=(itemInfo?.price??0)*cartItems[item];
             }
            
         }

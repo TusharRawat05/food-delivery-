@@ -5,10 +5,15 @@ import './Navbar.css'
 import { Link } from 'react-router'
 import { StoreContext } from '../Context/StoreContext.tsx'
 
-const Navbar = ({setshowLogin}) => {
+type NavbarProps = {
+  setshowLogin: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const Navbar = ({setshowLogin}:NavbarProps) => {
 
   const [menu, setmenu] = useState<string>("home")
-  const {getTotalCartAmount}=useContext(StoreContext)
+   const store = useContext(StoreContext);
+  const getTotalCartAmount = store?.getTotalCartAmount ?? (() => 0);
   return (
     <div className="navbar ">
        <Link to='/'><img src={assets.logo} alt="" className='logo ' /></Link> 

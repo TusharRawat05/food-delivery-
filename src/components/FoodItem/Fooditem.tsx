@@ -1,5 +1,5 @@
 
-import { useContext, useState } from 'react'
+import { useContext} from 'react'
 import { assets } from '../../assets/frontend_assets/assets'
 import './Fooditem.css'
 import { StoreContext } from '../../Context/StoreContext'
@@ -14,7 +14,11 @@ interface foodProp{
 
 const Fooditem = ({id,name,price, description,image}:foodProp) => {
 
-    const{cartItems,setcartItems,removeFromCart,addToCart}=useContext(StoreContext);
+    const store=useContext(StoreContext)
+    if(!store) return null
+
+
+    const{cartItems,removeFromCart,addToCart}=store;
   return (
     <div className='food-item'>
         <div className="food-item-img-container">
