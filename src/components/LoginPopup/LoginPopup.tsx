@@ -2,7 +2,10 @@ import { useState } from 'react'
 import './LoginPopUp.css'
 import { assets } from '../../assets/frontend_assets/assets'
 
-const LoginPopup = ({setshowLogin}:boolean) => {
+interface LoginPopupProps {
+  setshowLogin: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const LoginPopup = ({setshowLogin}:LoginPopupProps) => {
     const [current, setcurrent] = useState<string>("Sign up")
   return (
     <div className="login-popup">

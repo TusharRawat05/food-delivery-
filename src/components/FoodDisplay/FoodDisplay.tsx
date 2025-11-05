@@ -24,7 +24,7 @@ const FoodDisplay = ({category}:FoodDisplayProps) => {
     <div className='food-display' id='Food-display'>
         <h2>Top dishes near you</h2>
         <div className="food-display-list">
-            {food_list.map((item:itemtype ,index:number)=>{
+            {food_list.map((item:itemtype ,index)=>{
                 if(category==="All" || category===item.category){
                       return(
                     

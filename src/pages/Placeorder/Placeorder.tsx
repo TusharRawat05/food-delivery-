@@ -4,7 +4,9 @@ import './Placeorder.css'
 import { StoreContext } from '../../Context/StoreContext'
 
 const Placeorder = () => {
-  const {getTotalCartAmount}=useContext(StoreContext)
+  const store=useContext(StoreContext)
+  if(!store) return null;
+  const {getTotalCartAmount}=store
   return (
     <form className='place-order' action="submit">
       <div className="place-order-left">
